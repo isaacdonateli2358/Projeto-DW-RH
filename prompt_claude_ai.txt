@@ -1,0 +1,657 @@
+Preciso que você gere múltiplas bases de dados em Excel voltadas para Recursos Humanos (RH), utilizando dados sintéticos, porém altamente realistas e consistentes entre si.
+Estas bases irão ser focadas em uma empresa de vendas (varejo) presente em todos os estados do brasil e em pelo menos 100 cidades, ou seja terá 100 lojas.
+________________________________________
+ 1. OBJETIVO
+Criar uma base principal de colaboradores e bases auxiliares relacionadas, garantindo consistência lógica entre todas as informações para uso em análises de BI, SQL e dashboards.
+________________________________________
+ 2. BASE PRINCIPAL: colaboradores
+Gerar uma base com 50.000 registros (colaboradores).
+Estrutura das colunas:
+IMPORTANTE: Todas as colunas devem estar no formato snake_case (usar "_" no lugar de espaços).
+•	matricula_colaborador (Único, contendo 8 caracteres sendo 3 letras “COL” e 5 números. Ex.: “COL00001”. As matriculas devem seguir a sequência de data de admissão, ou seja, a matricula COL00001 será a primeira admissão que foi realizada.)
+
+•	nome_colaborador (nome e sobrenome aleatórios. Precisa ter no mínimo nome, nome do meio e sobrenome.)
+
+
+•	sexo (Masculino/Feminino)
+
+•	data_nascimento (formato: yyyy-mm-dd)
+
+
+•	idade_na_contratacao (nesta coluna será apresentado quantos anos o colaborador tinha quando entrou na empresa)
+•	Idade (colocar a idade do colaborador hoje)
+
+•	cidade_moradia (tem que ser a mesma cidade aonde o colaborador trabalha)
+
+
+•	estado_moradia (ter que ser o mesmo estado aonde o colaborador trabalha)
+
+•	pais (Brasil)
+
+
+•	naturalidade (cidade e estado de nascimento. Ex.: São Paulo - SP)
+
+•	data_admissao (entre 2005-01-01 e 2026-12-31, distribuído em todos os meses. Apenas dias uteis e desconsiderar feriados também)
+
+•	data_demissao (preencher apenas quando aplicável. Apenas dias uteis e desconsiderar feriados também)
+
+
+•	situacao (Ativo, Desligado, Aposentado)
+
+•	motivo_desligamento (preencher apenas se desligado)
+
+Se um aprendiz ou estagiário for desligado e o período entre a data de admissão e demissão for 2 anos então lançar “Término de Contrato” se for menos do que 2 anos, pode lançar “baixo desempenho”, descumprimento de regras ou Pedido de demissão”
+Para os demais colaboradores que forem desligados pode lançar “Pedido de demissão” ou “Iniciativa da empresa”
+Os 4 casos de demissão por justa causa pode lançar na coluna motivo_desligamento “Abandono”
+
+
+•	tipo_desligamento (deverá seguir as seguintes regras:
+Se um aprendiz for desligado deverá ser lançado “Demissão sem Justa Causa”
+Se um estagiário for desligado deverá constar “Demissão sem justa causa”. Se não for aprendiz ou estagiário poderá ser lançado ou “Demissão sem justa causa ou Demissão por Justa Causa (somente uns 4 casos) 
+
+•	tipo_contratacao (Estágio, Aprendiz, CLT)
+
+•	escolaridade (Ensino Médio Incompleto, Ensino Médio Completo, Superior Incompleto, Superior Completo, Pós-Graduação Incompleto, Pós-Graduação Completo, Mestrado, Doutorado.)
+
+
+•	departamento (Administrativo, Operações, Tecnologia, Comercial)
+
+•	centro_custo (Administrativo: Departamento Pessoal, DHO, SESMT, Planejamento, Controladoria, Compras, Frotas, Jurídico, Diretoria, Financeiro, Facilities, Qualidade, Projetos Inovação, Recrutamento e Seleção.
+Operações: Logisitica, Manutenção, produção, Deposito, Limpeza, Prevenção de Perdas, SESMT – CD, RH - CD
+Tecnologia: Suporte e Service Desk, Infraestrutura, Desenvolvimento, Inteligencia de Negócios.
+Comercial: Vendas, Limpeza, caixas, Estoque, SESMT – Lojas, RH – Lojas, Prevenção de Perdas)
+Portanto a estrutura dos centro_custo ficará:
+departamento	centro_custo
+Administrativo	Departamento Pessoal
+Administrativo	DHO
+Administrativo	Recrutamento e Seleção
+Administrativo	SESMT
+Administrativo	Planejamento
+Administrativo	Controladoria
+Administrativo	Compras
+Administrativo	Frotas
+Administrativo	Jurídico
+Administrativo	Diretoria
+Administrativo	Financeiro
+Administrativo	Facilities
+Administrativo	Qualidade
+Administrativo	Projeto Inovação
+Operações	Logística
+Operações	Manutenção
+Operações	Produção
+Operações	Depósito
+Operações	SESMT – CD
+Operações	RH – CD
+Operações	Prevenção de Perdas
+Operações	Limpeza
+Tecnologia	Suporte e Service Desk
+Tecnologia	Infraestrutura
+Tecnologia	Desenvolvimento
+Tecnologia	Inteligência de Negócios
+Comercial	Vendas
+Comercial	Limpeza
+Comercial	Prevenção de Perdas
+Comercial	SESMT – Lojas
+Comercial	RH – Lojas
+Comercial	Caixas
+Comercial	Estoque
+
+
+funcao: 
+As função deverão ser distribuídas nesse formato:
+Departamento	centro_custo	Funcao
+Administrativo	Departamento Pessoal	Auxiliar de Departamento Pessoal
+Administrativo	Departamento Pessoal	Assistente de Departamento Pessoal
+Administrativo	Departamento Pessoal	Analista de Departamento Pessoal Jr
+Administrativo	Departamento Pessoal	Analista de Departamento Pessoal Pl
+Administrativo	Departamento Pessoal	Analista de Departamento Pessoal Sr
+Administrativo	Departamento Pessoal	Coordenador de Departamento Pessoal
+Administrativo	Departamento Pessoal	Gerente de Departamento Pessoal
+Administrativo	DHO	Auxiliar de RH
+Administrativo	DHO	Assistente de RH
+Administrativo	DHO	Analista de DHO Jr
+Administrativo	DHO	Analista de DHO Pl
+Administrativo	DHO	Analista de DHO Sr
+Administrativo	DHO	Analista de Treinamento e Desenvolvimento
+Administrativo	DHO	Analista de Cultura Organizacional
+Administrativo	DHO	Business Partner (HRBP)
+Administrativo	DHO	Coordenador de DHO
+Administrativo	DHO	Gerente de DHO
+Administrativo	Recrutamento e Seleção	Auxiliar de Recrutamento e Seleção
+Administrativo	Recrutamento e Seleção	Assistente de Recrutamento e Seleção
+Administrativo	Recrutamento e Seleção	Analista de Recrutamento e Seleção Jr
+Administrativo	Recrutamento e Seleção	Analista de Recrutamento e Seleção Pl
+Administrativo	Recrutamento e Seleção	Analista de Recrutamento e Seleção Sr
+Administrativo	Recrutamento e Seleção	Analista de Talent Acquisition
+Administrativo	Recrutamento e Seleção	Tech Recruiter
+Administrativo	Recrutamento e Seleção	Especialista em Recrutamento e Seleção
+Administrativo	Recrutamento e Seleção	Coordenador de Recrutamento e Seleção
+Administrativo	Recrutamento e Seleção	Gerente de Recrutamento e Seleção
+Administrativo	Planejamento	Assistente de Planejamento
+Administrativo	Planejamento	Analista de Planejamento Jr
+Administrativo	Planejamento	Analista de Planejamento Pl
+Administrativo	Planejamento	Analista de Planejamento Sr
+Administrativo	Planejamento	Analista de Planejamento Estratégico
+Administrativo	Planejamento	Coordenador de Planejamento
+Administrativo	Planejamento	Gerente de Planejamento
+Administrativo	Controladoria	Assistente de Controladoria
+Administrativo	Controladoria	Analista de Controladoria Jr
+Administrativo	Controladoria	Analista de Controladoria Pl
+Administrativo	Controladoria	Analista de Controladoria Sr
+Administrativo	Controladoria	Controller
+Administrativo	Controladoria	Coordenador de Controladoria
+Administrativo	Controladoria	Gerente de Controladoria
+Administrativo	Compras	Auxiliar de Compras
+Administrativo	Compras	Assistente de Compras
+Administrativo	Compras	Analista de Compras Jr
+Administrativo	Compras	Analista de Compras Pl
+Administrativo	Compras	Analista de Compras Sr
+Administrativo	Compras	Comprador
+Administrativo	Compras	Coordenador de Compras
+Administrativo	Compras	Gerente de Compras
+Administrativo	Diretoria	Diretor Administrativo
+Administrativo	Diretoria	Diretor de Operações
+Administrativo	Diretoria	Diretor de Tecnologia
+Administrativo	Diretoria	Diretor Comercial
+Administrativo	Frotas	Auxiliar de Frotas
+Administrativo	Frotas	Assistente de Frotas
+Administrativo	Frotas	Analista de Frotas Jr
+Administrativo	Frotas	Analista de Frotas Pl
+Administrativo	Frotas	Analista de Frotas Sr
+Administrativo	Frotas	Coordenador de Frotas
+Administrativo	Frotas	Gerente de Frotas
+Administrativo	Jurídico	Assistente Jurídico
+Administrativo	Jurídico	Analista Jurídico Jr
+Administrativo	Jurídico	Analista Jurídico Pl
+Administrativo	Jurídico	Analista Jurídico Sr
+Administrativo	Jurídico	Advogado Jr
+Administrativo	Jurídico	Advogado Pl
+Administrativo	Jurídico	Advogado Sr
+Administrativo	Jurídico	Coordenador Jurídico
+Administrativo	Jurídico	Gerente Jurídico
+Administrativo	Financeiro	Auxiliar Financeiro
+Administrativo	Financeiro	Assistente Financeiro
+Administrativo	Financeiro	Analista Financeiro Jr
+Administrativo	Financeiro	Analista Financeiro Pl
+Administrativo	Financeiro	Analista Financeiro Sr
+Administrativo	Financeiro	Analista de Contas a Pagar
+Administrativo	Financeiro	Analista de Contas a Receber
+Administrativo	Financeiro	Tesoureiro
+Administrativo	Financeiro	Coordenador Financeiro
+Administrativo	Financeiro	Gerente Financeiro
+Administrativo	Facilities	Auxiliar de Limpeza
+Administrativo	Facilities	Oficial de Manutenção Predial
+Administrativo	Facilities	Recepcionista
+Administrativo	Facilities	Auxiliar de Facilities
+Administrativo	Facilities	Assistente de Facilities
+Administrativo	Facilities	Analista de Facilities Jr
+Administrativo	Facilities	Analista de Facilities Pl
+Administrativo	Facilities	Analista de Facilities Sr
+Administrativo	Facilities	Coordenador de Facilities
+Administrativo	Facilities	Gerente de Facilities
+Administrativo	Qualidade	Auxiliar de Qualidade
+Administrativo	Qualidade	Assistente de Qualidade
+Administrativo	Qualidade	Analista de Qualidade Jr
+Administrativo	Qualidade	Analista de Qualidade Pl
+Administrativo	Qualidade	Analista de Qualidade Sr
+Administrativo	Qualidade	Auditor de Qualidade
+Administrativo	Qualidade	Engenheiro de Qualidade
+Administrativo	Qualidade	Coordenador de Qualidade
+Administrativo	Qualidade	Gerente de Qualidade
+Administrativo	Projeto Inovação	Assistente de Projetos
+Administrativo	Projeto Inovação	Analista de Projetos Jr
+Administrativo	Projeto Inovação	Analista de Projetos Pl
+Administrativo	Projeto Inovação	Analista de Projetos Sr
+Administrativo	Projeto Inovação	PMO (Project Management Officer)
+Administrativo	Projeto Inovação	Scrum Master
+Administrativo	Projeto Inovação	Product Owner
+Administrativo	Projeto Inovação	Coordenador de Projetos
+Administrativo	Projeto Inovação	Gerente de Projetos
+Administrativo	Projeto Inovação	Gerente de Inovação
+Operações	Logística	Auxiliar de Logística
+Operações	Logística	Assistente de Logística
+Operações	Logística	Analista de Logística Jr
+Operações	Logística	Analista de Logística Pl
+Operações	Logística	Analista de Logística Sr
+Operações	Logística	Coordenador de Logística
+Operações	Logística	Gerente de Logística
+Operações	Manutenção	Auxiliar de Manutenção
+Operações	Manutenção	Técnico de Manutenção
+Operações	Manutenção	Técnico de Manutenção Sr
+Operações	Manutenção	Engenheiro de Manutenção
+Operações	Manutenção	Coordenador de Manutenção
+Operações	Manutenção	Gerente de Manutenção
+Operações	Prevenção de Perdas	Coordenador de Prevenção de Perdas
+Operações	Prevenção de Perdas	Fiscal de Prevenção de Perdas
+Operações	SESMT - CD	Enfermeiro do Trabalho
+Operações	SESMT - CD	Médico do Trabalho
+Operações	SESMT - CD	Técnico de Segurança do Trabalho
+Operações	RH – CD	Assistente de Departamento Pessoal
+Operações	RH – CD	Analista de Recrutamento e Seleção jr
+Operações	Produção	Auxiliar de Produção
+Operações	Produção	Operador de Produção
+Operações	Produção	Líder de Produção
+Operações	Produção	Supervisor de Produção
+Operações	Produção	Coordenador de Produção
+Operações	Produção	Gerente de Produção
+Operações	Depósito	Auxiliar de Limpeza
+Operações	Depósito	Auxiliar de Depósito
+Operações	Depósito	Conferente
+Operações	Depósito	Estoquista
+Operações	Depósito	Líder de Depósito
+Operações	Depósito	Supervisor de Depósito
+Operações	Depósito	Coordenador de Depósito
+Tecnologia	Suporte e Service Desk	Auxiliar de TI
+Tecnologia	Suporte e Service Desk	Técnico de Suporte
+Tecnologia	Suporte e Service Desk	Analista de Service Desk Jr
+Tecnologia	Suporte e Service Desk	Analista de Service Desk Pl
+Tecnologia	Suporte e Service Desk	Analista de Service Desk Sr
+Tecnologia	Suporte e Service Desk	Coordenador de Suporte
+Tecnologia	Suporte e Service Desk	Gerente de Suporte
+Tecnologia	Infraestrutura	Técnico de Infraestrutura
+Tecnologia	Infraestrutura	Analista de Infraestrutura Jr
+Tecnologia	Infraestrutura	Analista de Infraestrutura Pl
+Tecnologia	Infraestrutura	Analista de Infraestrutura Sr
+Tecnologia	Infraestrutura	Engenheiro de Infraestrutura
+Tecnologia	Infraestrutura	Coordenador de Infraestrutura
+Tecnologia	Infraestrutura	Gerente de Infraestrutura
+Tecnologia	Desenvolvimento	Desenvolvedor Jr
+Tecnologia	Desenvolvimento	Desenvolvedor Pl
+Tecnologia	Desenvolvimento	Desenvolvedor Sr
+Tecnologia	Desenvolvimento	Engenheiro de Software
+Tecnologia	Desenvolvimento	Arquiteto de Software
+Tecnologia	Desenvolvimento	Tech Lead
+Tecnologia	Desenvolvimento	Coordenador de Desenvolvimento
+Tecnologia	Desenvolvimento	Gerente de Desenvolvimento
+Tecnologia	Inteligência de Negócios	Auxiliar de Dados
+Tecnologia	Inteligência de Negócios	Assistente de BI
+Tecnologia	Inteligência de Negócios	Analista de BI Jr
+Tecnologia	Inteligência de Negócios	Analista de BI Pl
+Tecnologia	Inteligência de Negócios	Analista de BI Sr
+Tecnologia	Inteligência de Negócios	Analista de Dados
+Tecnologia	Inteligência de Negócios	Cientista de Dados
+Tecnologia	Inteligência de Negócios	Engenheiro de Dados
+Tecnologia	Inteligência de Negócios	Coordenador de BI
+Tecnologia	Inteligência de Negócios	Gerente de BI
+Comercial	Vendas	Auxiliar de Vendas
+Comercial	Vendas	Assistente de Vendas
+Comercial	Vendas	Vendedor
+Comercial	Vendas	Vendedor Sr
+Comercial	Vendas	Executivo de Contas
+Comercial	Vendas	Supervisor de Vendas
+Comercial	Vendas	Coordenador de Vendas
+Comercial	Vendas	Gerente de Vendas
+Comercial	Limpeza	Auxiliar de Limpeza
+Comercial	Limpeza	Servente de Limpeza
+Comercial	Limpeza	Líder de Limpeza
+Comercial	Limpeza	Supervisor de Limpeza
+Comercial	Caixas	Operador de Caixa
+Comercial	Caixas	Fiscal de Caixa
+Comercial	Caixas	Supervisor de Caixa
+Comercial	Caixas	Tesoureiro
+Comercial	Estoque	Auxiliar de Estoque
+Comercial	Estoque	Estoquista
+Comercial	Estoque	Conferente de Estoque
+Comercial	Estoque	Analista de Estoque
+Comercial	Estoque	Supervisor de Estoque
+Comercial	Prevenção de Perdas	Fiscal de Prevenção de Perdas
+Comercial	Prevenção de Perdas	Coordenador de Prevenção de Perdas
+Comercial	SESMT – Lojas	Médico do Trabalho
+Comercial	SESMT – Lojas	Enfermeiro do Trabalho
+Comercial	SESMT – Lojas	Técnico de Segurança do Trabalho
+Comercial	RH - Lojas	Analista de Recrutamento e Seleção Jr
+Comercial	RH - Lojas	Assistente de Departamento Pessoal
+Comercial	Estoque	Coordenador de Estoque
+Administrativo	SESMT	Técnico de Segurança do Trabalho
+Administrativo	SESMT	Técnico de Segurança do Trabalho Sr
+Administrativo	SESMT	Engenheiro de Segurança do Trabalho
+Administrativo	SESMT	Enfermeiro do Trabalho
+Administrativo	SESMT	Técnico de Enfermagem do Trabalho
+Administrativo	SESMT	Médico do Trabalho
+Administrativo	SESMT	Coordenador de Segurança do Trabalho
+Administrativo	SESMT	Gerente de SESMT
+
+
+
+•	salario_contratacao (Se basear nas tabelas de salario por função/cidade que eu vou enviar, esses valores se refletiram nas bases de folha de pagamento e recrutamento e seleção. Outro ponto importante é os salários dos aprendizes e estagiários que estão na tabela que eu vou enviar)
+•	vale_alimentacao (fixo: 500 para todos)
+•	auxilio_combustivel (350 apenas para cargos de gestão, “Diretor”, “Gerente”, “Coordenador”)
+•	auxilio_creche (400 para aproximadamente 30% das mulheres)
+•	loja ( 
+
+Centro Distribuição – Campinas,
+Centro Distribuição – Maringá,
+Centro Distribuição – Santos,
+Loja Anápolis,
+Loja Aracaju,
+Loja Belém,
+Loja Belo Horizonte,
+Loja Boa Vista,
+Loja Brasília,
+Loja Campinas,
+Loja Campo Grande,
+Loja Caruaru,
+Loja Caxias do Sul,
+Loja Cuiabá,
+Loja Curitiba,
+Loja Feira de Santana,
+Loja Florianópolis,
+Loja Fortaleza,
+Loja Goiânia,
+Loja João Pessoa,
+Loja Joinville,
+Loja Juazeiro do Norte,
+Loja Londrina,
+Loja Macapá,
+Loja Maceió,
+Loja Manaus,
+Loja Maringá,
+Loja Natal,
+Loja Niterói,
+Loja Palmas,
+Loja Porto Alegre,
+Loja Porto Velho,
+Loja Recife,
+Loja Ribeirão Preto,
+Loja Rio Branco,
+Loja Rio de Janeiro,
+Loja Salvador,
+Loja Santos,
+Loja São Luís,
+Loja São Paulo,
+Loja Sorocaba,
+Loja Teresina,
+Loja Uberlândia,
+Matriz)
+
+•	cidade_loja (São Paulo, Recife, Uberlândia, Rio de Janeiro, Curitiba, Porto Alegre, Londrina, Porto Velho, Florianópolis, Salvador, Campinas, Cuiabá, Anápolis, Sorocaba, Caruaru, Aracaju, Goiânia, Fortaleza, Joinville, Macapá, Natal, Campo Grande, Belo Horizonte, Boa Vista, Juazeiro do Norte, Brasília, Maceió, Maringá, Caxias do Sul, Rio Branco, Ribeirão Preto, Niterói, Belém, Santos, Manaus, Palmas, Feira de Santana, Teresina, São Luiz, João Pessoa)
+•	estado_loja (de acordo aonde fica a cidade)
+•	pais_loja (Brasil)
+________________________________________
+3. REGRAS DE CONSISTÊNCIA (OBRIGATÓRIO)
+Todos que estiverem com a função “Diretor” precisa estar no departamento “Administrativo”, centro_custo “Diretoria”, loja “Matriz”. Serão 4 Nomeclaturas de Diretores: Diretor Administrativo, Diretor Comercial, Diretor de Operações e Diretor de Tecnologia, ou seja serão 4 diretores ativos. Eles terão escolaridade “Superior Completo” ou “Pós-Graduação Completo”. Incluir 4 na situação “Desligado”.
+
+Os “Coordenadores” que estiverem atrelados ao departamento “Administrativo” serão 1 ativo por centro_custo e 1 desligado por centro_custo. Todos os coordenadores terão “Superior Completo ou Pós Graduação Incompleto”
+
+Os “Coordenadores” dos Departamentos “Operações” e “Comercial” serão de 2 a 3 coordenadores por “Loja” ativos, e 1 ou 2 desligados por Loja. Eles terão “Superior Incompleto” ou “Superior Completo”.
+Os dados devem respeitar TODAS as regras abaixo:
+Idade
+•	mínimo: 17 anos – 
+•	máximo: 75 anos
+Tipo de contratação
+Aprendiz:
+•	idade entre 17 e 24 anos
+•	função:
+Auxiliar de Departamento Pessoal,
+Auxiliar de RH,
+Assistente de Planejamento,
+Assistente de Controladoria,
+Auxiliar de Compras,
+Auxiliar de Frotas,
+Assistente Jurídico,
+Auxiliar Financeiro,
+Auxiliar de Facilities,
+Auxiliar de Logística,
+Auxiliar de Produção,
+Auxiliar de Depósito,
+Auxiliar de Estoque,
+Auxiliar de TI,
+Auxiliar de Dados,
+Assistente de BI,
+Auxiliar de Vendas,
+Auxiliar de Limpeza.
+
+•	escolaridade: Ensino Médio Incompleto (quem for menor de 18) ou Completo (maior de 18)
+Estágio:
+•	idade entre 25 e 40 anos
+•	escolaridade: Ensino Superior Incompleto ou Pós-Graduação Incompleto
+•	Funções que o estagiário pode ser aplicado:
+Auxiliar de Departamento Pessoal,
+Assistente de Departamento Pessoal,
+Auxiliar de RH,
+Assistente de RH,
+Assistente de Planejamento,
+Assistente de Controladoria,
+Auxiliar de Compras,
+Assistente de Compras,
+Auxiliar Financeiro,
+Assistente Financeiro,
+Assistente Jurídico,
+Analista de Planejamento Jr,
+Analista de Controladoria Jr,
+Analista Financeiro Jr,
+Analista de Compras Jr,
+Analista de BI Jr,
+Analista de Dados Jr,
+Auxiliar de TI,
+Técnico de Suporte,
+Analista de Service Desk Jr,
+Analista de Infraestrutura Jr,
+Desenvolvedor Jr,
+Auxiliar de Logística,
+Assistente de Logística,
+Auxiliar de Produção,
+Auxiliar de Depósito,
+Auxiliar de Estoque,
+Auxiliar de Vendas,
+Assistente de Vendas,
+Auxiliar de Facilities,
+Auxiliar de Frotas,
+Auxiliar de Qualidade,
+Assistente de Qualidade
+CLT (efetivo):
+•	todas as demais funções
+________________________________________
+Funções e escolaridade
+Cargos operacionais:
+•	escolaridade: Ensino Médio Completo
+Analistas:
+•	escolaridade: Ensino Superior
+Cargos jurídicos (ex: Advogado):
+•	idade mínima: 25 anos
+•	escolaridade: Ensino Superior completo
+Cargos de gestão (Coordenador, Gerente, Diretor):
+•	idade mínima: 26 anos
+•	recebem auxílio combustível
+________________________________________
+Situação dos colaboradores
+•	aproximadamente 75% Ativos
+•	aproximadamente 25% Desligados
+________________________________________
+Salários (coerência obrigatória)
+•	operacional: baixo (conforme tabela que eu irei enviar)
+•	analista: médio (conforme tabela que eu irei enviar)
+•	gestão: alto (conforme tabela que eu irei enviar)
+•	Aprendizes: (conforme tabela que eu irei enviar)
+•	Estagiarios: (conforme tabela que eu irei enviar)
+________________________________________
+4. CONTEXTO DA EMPRESA
+A empresa é uma rede de lojas em todo o Brasil.
+Regras:
+•	Criar nomes de lojas (ex: Loja São Paulo, Loja Campinas, Loja Salvador)
+•	Distribuir colaboradores em diferentes estados brasileiros
+•	Garantir consistência entre loja, cidade e estado
+•	Departamento “Administrativo” e seus centro de custos ficaram agrupado na loja chamada “Matriz”
+•	Departamento “Operações” e seus centro de custos ficaram agrupados para as lojas chamadas:
+Centro Distribuição – Campinas,
+Centro Distribuição – Maringá,
+Centro Distribuição – Santos,
+•	Departamento “Tecnologia” e seus centros de custos ficaram agrupados também na loja chamada “Matriz”
+•	Departamento “Comercial” e seus centro de custos ficaram agrupados nas demais lojas.
+•	Idade mínima para entrar na empresa é 17 anos completos no dia da admissão
+•	Idade máxima para entrar na empresa é 75 anos completos no dia da admissão.
+•	Nos casos dos aposentados, na coluna “situacão” deverá constar “aposentado” e no “motivo_desligamento” deverá constar “Aposentadoria”.
+•	Aposentados devem ter 62 anos de for mulher e 65 anos se for homem e não podem ser aprendiz ou estagiário, somente CLT.
+
+________________________________________
+5. BASES ADICIONAIS
+Gerar também as seguintes bases relacionadas:
+________________________________________
+Folha de pagamento (Devido ao volume de dados pode ser em SQL)
+Gerar o histórico da folha desde 01/01/2005 até 31/12/2026
+•	matricula_colaborador
+•	nome_colaborador
+•	mes_ano
+•	salario_base
+•	horas_extras_qtd
+•	horas_extras_valor
+•	adicional_noturno
+•	bonus
+•	comissoes
+•	vale_alimentacao
+•	vale_transporte
+•	auxilio_combustivel
+•	auxilio_creche
+•	inss
+•	irrf
+•	total_proventos
+•	total_descontos
+•	salario_liquido
+•	fgts
+•	custo_total_empresa
+•	centro_custo
+•	departamento
+•	funcao
+•	tipo_contratacao
+________________________________________
+Treinamentos 
+Gerar histórico de treinamentos desde 2005 até 2026
+•	matricula_colaborador
+•	nome_colaborador
+•	função
+•	centro_custo
+•	departamento
+•	curso
+•	data_inicio
+•	data_fim
+•	horas_treinamento
+•	status
+________________________________________
+Avaliação de desempenho 
+Gerar Histórico desde 2005 até 2026
+•	matricula_colaborador
+•	nome_colaborador
+•	ano
+•	ciclo_avaliacao (ex: 2024.1, 2024.2 ou Anual)
+•	data_da_avaliação
+•	centro_custo
+•	departamento
+•	funcao
+•	gestor_avaliador
+•	tipo_avaliacao (Autoavaliação, Gestor, Pares, 360)
+•	comunicação (nota de 0 a 10)
+•	trabalho_em_equipe (nota de 0 a 10)
+•	proatividade (nota de 0 a 10)
+•	lideranca (apenas para cargos de gestão, nota de 0 a 10)
+•	conhecimento_tecnico (nota de 0 a 10)
+•	organização (nota de 0 a 10)
+•	nota_final (média das competências)
+•	classificacao_desempenho
+(Ex: Baixo, Médio, Alto, Excelente)
+•	elegivel_promocao (Sim/Não)
+•	recomendacao_ajuste_salarial (Sim/Não)
+•	percentual_ajuste
+•	risco_desligamento (Baixo, Médio, Alto)
+•	pontos_fortes
+•	pontos_desenvolvimento
+
+
+
+
+________________________________________
+
+Absenteísmo
+Gerar Historico desde 2005 até 2026
+•	matricula_colaborador
+•	nome_colaborador
+•	funcao
+•	data_inicio_afastamento
+•	data_final_afastamento (se for atestado de 1 dia apresentar a mesma data_inicio_afastamento)
+•	total_dias_afastamento
+•	tipo_falta (ex: falta injustificada, atestado médico, atraso, etc.)
+•	horas_perdidas
+•	justificada (Sim/Não)
+•	cid (opcional, para afastamentos médicos)
+•	departamento
+•	centro_custo
+•	mes_ano
+•	tipo_ocorrencia (Falta, Atraso, Saída antecipada)
+
+________________________________________
+Recrutamento e seleção
+Nesta base lançar todos os colaboradores da empresa que foram admitidos ou seja os 50.000
+•	id_vaga
+•	funcao
+•	centro_custo
+•	departamento
+•	gestor_solicitante (o nome do gestor tem que ser o nome gerente que estava ativo no centro de custo no dia em que foi solicitado a vaga, caso no período que foi solicitado a vaga não tenha gerente ativo, favor colocar o nome do diretor do departamento ativo, ou seja se foi uma admissão para Operações colocar o nome do diretor de operações ativo. Caso não tenho diretor, retornar então “Recrutamento e Seleção”.
+•	id_candidato
+•	nome_candidato (aqui precisa constar os nomes de todos colaboradores que já entraram na empresa ou seja 20.000)
+•	sexo
+•	idade
+•	cidade
+•	estado
+•	fonte_candidato (LinkedIn, Indicação, Site, Consultoria, etc.)
+•	data_candidatura
+•	etapa_processo
+(Triagem, Entrevista RH, Entrevista Gestor, Teste, Proposta, Contratado, Reprovado)
+•	status_candidato (Em andamento, Aprovado, Reprovado, Desistiu)
+•	data_triagem
+•	data_entrevista_rh
+•	data_entrevista_gestor
+•	data_proposta
+•	data_contratacao (aqui precisa ter a data da admissão)
+•	tempo_contratacao_dias (data_contratacao - data_candidatura)
+•	tempo_por_etapa
+•	aprovado (Sim/Não)
+•	salario_oferecido
+•	nivel_vaga (Operacional, Analista, Gestão)
+•	tipo_contratacao (CLT, aprendiz ou estagio)
+
+________________________________________
+Metas
+Gerar metas organizacionais:
+Tabela Unificada:
+Colunas:
+•	ano
+•	mes
+•	centro_custo
+•	departamento
+•	nome_loja
+•	turnover_percentual
+•	admissões_quantidade
+•	demissões_quantidade
+•	horas_extras
+•	absenteísmo_percentual
+•	treinamento_horas
+
+Regras importantes
+•	metas devem variar por mês (não repetir tudo igual)
+•	setores diferentes devem ter metas diferentes
+•	turnover deve ser coerente com volume de colaboradores
+•	admissões e demissões devem fazer sentido entre si
+•	horas extras maiores em áreas operacionais
+____________________________________________________________________________________
+ 6. Headcount Orçado por função e loja em cada mês desde janeiro de 2005 até dezembro de 2026
+Montar uma base contendo as seguintes colunas:
+•	ano
+•	mes
+•	nome_loja
+•	departamento
+•	centro_custo
+•	funcao
+•	total_headcount_orcado
+ 
+Essa base precisa respeitar a regra que nos meses de abril, julho e dezembro e janeiro se vende mais nas lojas, consequentemente precisa ter mais colaboradores orçado.
+________________________________________
+ 6. FORMATO DE ENTREGA
+•	Gerar arquivos separados em formato .xlsx ou SQL
+•	Nomear cada arquivo corretamente conforme seu conteúdo
+•	Garantir que todas as bases se relacionem via matricula_colaborador
+•	Compactar todos os arquivos em um único arquivo .zip
+________________________________________
+7. REQUISITOS FINAIS
+•	Dados devem ser realistas e consistentes
+•	Não permitir incoerências (ex: aprendiz como advogado)
+•	Garantir integridade entre todas as tabelas
+•	Pronto para uso em Power BI, SQL e análise de dados
